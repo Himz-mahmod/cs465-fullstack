@@ -1,10 +1,7 @@
-const travelController = {
-  index: (req, res) => {
-    res.render('index');
-  },
-  travel: (req, res) => {
-    res.render('travel');
-  }
+const travel = (req, res) => {
+  res.render('travel', { title: 'Travlr Getaways' });
 };
 
-module.exports = travelController;
+module.exports = {
+  travel
+};
