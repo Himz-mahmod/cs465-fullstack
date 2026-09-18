@@ -6,7 +6,8 @@ const app = express();
 
 app.engine('hbs', exphbs.engine({
   extname: 'hbs',
-  defaultLayout: 'main'
+  defaultLayout: false,
+  partialsDir: path.join(__dirname, 'app_server/views/partials')
 }));
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'app_server/views'));
