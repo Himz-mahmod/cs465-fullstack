@@ -6,4 +6,7 @@
     <p class="card-text">Starting {{ trip.start | date }} at {{ trip.perPerson | currency }} per person</p>
     <div class="card-text" [innerHTML]="trip.description"></div>
   </div>
+  <div class="card-footer bg-white border-0 pb-3">
+    <a [routerLink]="['/edit-trip', trip.code]" class="btn btn-info">Edit Trip</a>
+  </div>
 </div>

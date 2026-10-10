@@ -13,7 +13,15 @@ export class TripData {
     return this.http.get<any[]>(this.url);
   }
 
+  getTrip(tripCode: string): Observable<any[]> {
+    return this.http.get<any[]>(this.url + '/' + tripCode);
+  }
+
   addTrip(formData: any): Observable<any> {
     return this.http.post<any>(this.url, formData);
+  }
+
+  updateTrip(tripCode: string, formData: any): Observable<any> {
+    return this.http.put<any>(this.url + '/' + tripCode, formData);
   }
 }
