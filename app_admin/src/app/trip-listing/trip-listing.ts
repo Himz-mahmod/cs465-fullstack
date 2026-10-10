@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { CurrencyPipe, DatePipe } from '@angular/common';
 import { trips } from '../data/trips';
+import { TripCard } from '../trip-card/trip-card';
 
 @Component({
   selector: 'app-trip-listing',
-  imports: [CurrencyPipe, DatePipe],
+  imports: [TripCard],
   templateUrl: './trip-listing.html',
   styleUrl: './trip-listing.css'
 })
