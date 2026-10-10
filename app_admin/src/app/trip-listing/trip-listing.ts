@@ -1,10 +1,11 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { TripCard } from '../trip-card/trip-card';
 import { TripData } from '../services/trip-data';
 
 @Component({
   selector: 'app-trip-listing',
-  imports: [TripCard],
+  imports: [TripCard, RouterLink],
   templateUrl: './trip-listing.html',
   styleUrl: './trip-listing.css'
 })

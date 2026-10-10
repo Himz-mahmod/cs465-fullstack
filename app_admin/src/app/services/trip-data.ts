@@ -12,4 +12,8 @@ export class TripData {
   getTrips(): Observable<any[]> {
     return this.http.get<any[]>(this.url);
   }
+
+  addTrip(formData: any): Observable<any> {
+    return this.http.post<any>(this.url, formData);
+  }
 }
