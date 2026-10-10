@@ -17,6 +17,17 @@ app.set('views', path.join(__dirname, 'app_server/views'));
 
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Read JSON request bodies (needed for Add and Edit trip)
+app.use(express.json());
+
+// Allow the Angular admin app (port 4200) to call the API
+app.use('/api', (req, res, next) => {
+  res.header('Access-Control-Allow-Origin', 'http://localhost:4200');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  next();
+});
+
 const routes = require('./app_server/routes/index');
 const apiRouter = require('./app_api/routes/index');
 

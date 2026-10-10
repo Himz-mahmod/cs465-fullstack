@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { trips } from '../data/trips';
+import { Component, OnInit, inject, signal } from '@angular/core';
 import { TripCard } from '../trip-card/trip-card';
+import { TripData } from '../services/trip-data';
 
 @Component({
   selector: 'app-trip-listing',
@@ -8,6 +8,23 @@ import { TripCard } from '../trip-card/trip-card';
   templateUrl: './trip-listing.html',
   styleUrl: './trip-listing.css'
 })
-export class TripListing {
-  trips: any[] = trips;
+export class TripListing implements OnInit {
+  private tripData = inject(TripData);
+  trips = signal<any[]>([]);
+  message = signal('');
+
+  ngOnInit(): void {
+    this.tripData.getTrips().subscribe({
+      next: (data) => {
+        this.trips.set(data);
+        this.message.set(data.length > 0
+          ? `There are ${data.length} trips available.`
+          : 'There were no trips retrieved from the database.');
+      },
+      error: (err) => {
+        console.log('Error: ', err);
+        this.message.set('Could not load trips from the API.');
+      }
+    });
+  }
 }

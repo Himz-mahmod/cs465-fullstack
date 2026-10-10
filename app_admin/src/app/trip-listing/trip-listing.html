@@ -1,7 +1,8 @@
 <div class="container mt-4">
-  <h1 class="mb-4">Travlr Getaways Admin</h1>
+  <h1 class="mb-2">Travlr Getaways Admin</h1>
+  <p class="text-muted mb-4">{{ message() }}</p>
   <div class="row">
-    @for (trip of trips; track trip.code) {
+    @for (trip of trips(); track trip._id) {
       <div class="col-md-4 mb-4">
         <app-trip-card [trip]="trip"></app-trip-card>
       </div>
