@@ -1,27 +1,50 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Trip } from '../models/trip';
+import { User } from '../models/user';
+import { AuthResponse } from '../models/auth-response';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TripData {
   private http = inject(HttpClient);
-  private url = 'http://localhost:3000/api/trips';
+  private baseUrl = 'http://localhost:3000/api';
+  private url = this.baseUrl + '/trips';
 
-  getTrips(): Observable<any[]> {
-    return this.http.get<any[]>(this.url);
+  // GET /api/trips
+  getTrips(): Observable<Trip[]> {
+    return this.http.get<Trip[]>(this.url);
   }
 
-  getTrip(tripCode: string): Observable<any[]> {
-    return this.http.get<any[]>(this.url + '/' + tripCode);
+  // GET /api/trips/:tripCode (the API returns an array with one trip)
+  getTrip(tripCode: string): Observable<Trip[]> {
+    return this.http.get<Trip[]>(this.url + '/' + tripCode);
   }
 
-  addTrip(formData: any): Observable<any> {
-    return this.http.post<any>(this.url, formData);
+  // POST /api/trips
+  addTrip(formData: Trip): Observable<Trip> {
+    return this.http.post<Trip>(this.url, formData);
   }
 
-  updateTrip(tripCode: string, formData: any): Observable<any> {
-    return this.http.put<any>(this.url + '/' + tripCode, formData);
+  // PUT /api/trips/:tripCode
+  updateTrip(tripCode: string, formData: Trip): Observable<Trip> {
+    return this.http.put<Trip>(this.url + '/' + tripCode, formData);
+  }
+
+  // DELETE /api/trips/:tripCode
+  deleteTrip(tripCode: string): Observable<{ message: string; code: string }> {
+    return this.http.delete<{ message: string; code: string }>(this.url + '/' + tripCode);
+  }
+
+  // POST /api/login
+  login(email: string, password: string): Observable<AuthResponse> {
+    return this.http.post<AuthResponse>(this.baseUrl + '/login', { email, password });
+  }
+
+  // POST /api/register
+  register(user: User, password: string): Observable<AuthResponse> {
+    return this.http.post<AuthResponse>(this.baseUrl + '/register', { ...user, password });
   }
 }

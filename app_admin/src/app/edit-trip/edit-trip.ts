@@ -2,6 +2,7 @@ import { Component, OnInit, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TripData } from '../services/trip-data';
+import { Trip } from '../models/trip';
 
 @Component({
   selector: 'app-edit-trip',
@@ -44,7 +45,7 @@ export class EditTrip implements OnInit {
           code: trip.code,
           name: trip.name,
           length: trip.length,
-          start: trip.start ? trip.start.substring(0, 10) : '',
+          start: trip.start ? String(trip.start).substring(0, 10) : '',
           resort: trip.resort,
           perPerson: trip.perPerson,
           image: trip.image,
@@ -61,7 +62,7 @@ export class EditTrip implements OnInit {
   onSubmit(): void {
     this.submitted = true;
     if (this.editForm.valid) {
-      this.tripData.updateTrip(this.tripCode, this.editForm.value).subscribe({
+      this.tripData.updateTrip(this.tripCode, this.editForm.getRawValue() as Trip).subscribe({
         next: () => this.router.navigate(['']),
         error: (err) => console.log('Error: ', err)
       });

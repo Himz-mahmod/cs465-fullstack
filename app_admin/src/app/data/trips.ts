@@ -1,4 +1,7 @@
-export const trips = [
+import { Trip } from '../models/trip';
+
+// Mock trip data used by the unit tests
+export const trips: Trip[] = [
   {
     "code": "GALR210214",
     "name": "Gale Reef",

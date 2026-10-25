@@ -1,9 +1,19 @@
+require('dotenv').config(); // Load JWT_SECRET from .env
+
+if (!process.env.JWT_SECRET) {
+  console.error('JWT_SECRET is missing. Copy .env.example to .env and set a secret.');
+  process.exit(1);
+}
+
 const express = require('express');
 const path = require('path');
 const exphbs = require('express-handlebars');
 
+const passport = require('passport');
+
 // Bring in the database (moved under app_api)
 require('./app_api/models/db');
+require('./app_api/config/passport');
 
 const app = express();
 
@@ -19,6 +29,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Read JSON request bodies (needed for Add and Edit trip)
 app.use(express.json());
+app.use(passport.initialize());
 
 // Allow the Angular admin app (port 4200) to call the API
 app.use('/api', (req, res, next) => {

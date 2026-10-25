@@ -1,0 +1,9 @@
+<nav class="navbar navbar-dark bg-dark px-3">
+  <a class="navbar-brand" routerLink="/">Travlr Getaways Admin</a>
+  @if (auth.isLoggedIn()) {
+    <span class="navbar-text text-light ms-auto me-3">{{ auth.getCurrentUser()?.name }}</span>
+    <button type="button" class="btn btn-outline-light btn-sm" (click)="onLogout()">Log out</button>
+  } @else {
+    <a class="btn btn-outline-light btn-sm ms-auto" routerLink="/login">Log in</a>
+  }
+</nav>

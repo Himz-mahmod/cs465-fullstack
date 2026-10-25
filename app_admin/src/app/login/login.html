@@ -1,0 +1,19 @@
+<div class="container mt-5" style="max-width: 420px;">
+  <h2 class="mb-4">Admin login</h2>
+
+  @if (formError()) {
+    <div class="alert alert-danger">{{ formError() }}</div>
+  }
+
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label class="form-label" for="email">Email</label>
+      <input id="email" type="email" formControlName="email" class="form-control" autocomplete="username">
+    </div>
+    <div class="mb-3">
+      <label class="form-label" for="password">Password</label>
+      <input id="password" type="password" formControlName="password" class="form-control" autocomplete="current-password">
+    </div>
+    <button type="submit" class="btn btn-primary w-100">Log in</button>
+  </form>
+</div>

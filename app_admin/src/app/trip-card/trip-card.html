@@ -6,7 +6,10 @@
     <p class="card-text">Starting {{ trip.start | date }} at {{ trip.perPerson | currency }} per person</p>
     <div class="card-text" [innerHTML]="trip.description"></div>
   </div>
+  @if (auth.isLoggedIn()) {
   <div class="card-footer bg-white border-0 pb-3">
     <a [routerLink]="['/edit-trip', trip.code]" class="btn btn-info">Edit Trip</a>
+    <button type="button" class="btn btn-danger ms-2" (click)="deleteTrip()">Delete Trip</button>
   </div>
+  }
 </div>
